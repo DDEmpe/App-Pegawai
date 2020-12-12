@@ -198,6 +198,11 @@ public void refresh(){
         cmbkat.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         btncari.setText("Cari");
+        btncari.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btncariActionPerformed(evt);
+            }
+        });
 
         data.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -223,8 +228,8 @@ public void refresh(){
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel10)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -232,8 +237,9 @@ public void refresh(){
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtcari, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(45, 45, 45)
-                        .addComponent(btncari)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(btncari)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -299,9 +305,9 @@ public void refresh(){
                             .addComponent(btnkel, javax.swing.GroupLayout.Alignment.LEADING)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(146, 146, 146)
-                        .addComponent(jLabel1))
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel1)))
                 .addContainerGap(33, Short.MAX_VALUE))
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -367,22 +373,40 @@ public void refresh(){
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnhapActionPerformed
-   
+      int jawab = JOptionPane.showOptionDialog(this, 
+                        "Ingin Menghapus Data??", 
+                        "Hapus Data", 
+                        JOptionPane.YES_NO_OPTION, 
+                        JOptionPane.QUESTION_MESSAGE, null, null, null);
+        
+        if(jawab == JOptionPane.YES_OPTION){
+            
+         
         try{
             String sql = "delete from data where nik = '"+txtnik.getText()+"'";
             java.sql.Connection conn = (java.sql.Connection)app.pegawai.Database.koneksiDB();
             java.sql.PreparedStatement pst = conn.prepareStatement(sql);
             pst.execute();
-            JOptionPane.showMessageDialog(null, "Hapus Data?");
-           vsimpan = true;
-
+            JOptionPane.showMessageDialog(null, " Data Telah Terhapus");
             }catch (SQLException | HeadlessException e){
             }
         refresh();
+        }
+        
     }//GEN-LAST:event_btnhapActionPerformed
 
     private void btnkelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnkelActionPerformed
-        System.exit(0);
+      int jawab = JOptionPane.showOptionDialog(this, 
+                        "Ingin Keluar?", 
+                        "Keluar", 
+                        JOptionPane.YES_NO_OPTION, 
+                        JOptionPane.QUESTION_MESSAGE, null, null, null);
+        
+        if(jawab == JOptionPane.YES_OPTION){
+            System.exit(0);
+        }
+        
+
     }//GEN-LAST:event_btnkelActionPerformed
 
     private void btnrefActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnrefActionPerformed
@@ -391,6 +415,12 @@ public void refresh(){
 
     private void btnsimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsimActionPerformed
      AppPegawai peg = new AppPegawai();
+
+     
+     
+  if ((txtnik.getText().length()==0) || (cmbkel.getSelectedItem()=="")|| (cmbstat.getSelectedItem()=="") || (txtnam.getText().length()==0) || (txtumur.getText().length()==0) || (txtlahir.getText().length()==0) || (txtal.getText().length()==0) || (txtno.getText().length()==0)){
+   JOptionPane.showMessageDialog(null, " Data Tidak Lengkap!!!");
+  }else{
      String ni = txtnik.getText();
      String nam = txtnam.getText();
      Integer Umr = Integer.parseInt((txtumur.getText()));
@@ -399,12 +429,9 @@ public void refresh(){
      String no = txtno.getText();
      String sta =(String) cmbstat.getSelectedItem();
      String kel = (String) cmbkel.getSelectedItem();
-     
      peg.setAppPegawai(ni,nam,al,no,kel,Lahir,sta,Umr);
-        if (vsimpan == true){
-
-     
-    try
+   if (vsimpan == true){
+     try
     {
         String sql = "insert into data Values ('"+id+ "', '" + peg.getnik() + "','" + peg.getnam()+ "','" + peg.getumr() + "','" + peg.getkel() + "','" + peg.getlah() + "','" + peg.getal() + "','" + peg.getno() +"', '" + peg.getstat() + "')";
         java.sql.Connection conn = (java.sql.Connection)app.pegawai.Database.koneksiDB();
@@ -426,6 +453,7 @@ public void refresh(){
     }
 }       
         refresh();
+         }
     }//GEN-LAST:event_btnsimActionPerformed
 
     private void dataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dataMouseClicked
@@ -467,7 +495,7 @@ public void refresh(){
 
     private void btninActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btninActionPerformed
 
-            vsimpan = true;
+    vsimpan = true;
     txtnik.setEnabled(true);
     txtnam.setEnabled(true);
     txtumur.setEnabled(true);
@@ -486,14 +514,14 @@ public void refresh(){
 
     private void btnedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnedActionPerformed
     vsimpan = false;
-    txtnik.setEnabled(false);
-    txtnam.setEnabled(false);
-    txtumur.setEnabled(false);
-    txtal.setEnabled(false);
-    txtlahir.setEnabled(false);
-    txtno.setEnabled(false);
-    cmbkel.setEnabled(false);
-    cmbstat.setEnabled(false);
+    txtnik.setEnabled(true);
+    txtnam.setEnabled(true);
+    txtumur.setEnabled(true);
+    txtal.setEnabled(true);
+    txtlahir.setEnabled(true);
+    txtno.setEnabled(true);
+    cmbkel.setEnabled(true);
+    cmbstat.setEnabled(true);
     
       btnin.setEnabled(false);
       btnsim.setEnabled(true);
@@ -501,6 +529,29 @@ public void refresh(){
       btned.setEnabled(false);
       btnhap.setEnabled(false);
     }//GEN-LAST:event_btnedActionPerformed
+
+    private void btncariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncariActionPerformed
+        if ((txtcari.getText().length()==0) || (cmbkat.getSelectedItem()=="")){
+         JOptionPane.showMessageDialog(null, " Data Tidak Lengkap!!!");
+        }else{
+        try {
+        Connection conn =(Connection)app.pegawai.Database.koneksiDB();
+        java.sql.Statement stm = conn.createStatement();
+        if (cmbkat.getSelectedItem()=="NIK"){
+        java.sql.ResultSet sql = stm.executeQuery("select * from data Where nik='" +txtcari.getText()+"'");
+        data.setModel(DbUtils.resultSetToTableModel(sql));
+        }else if (cmbkat.getSelectedItem()=="Nama"){
+        java.sql.ResultSet sql = stm.executeQuery("select * from data Where nama='" +txtcari.getText()+"'");
+        data.setModel(DbUtils.resultSetToTableModel(sql));
+        }
+        
+       
+        
+    }
+    catch (SQLException | HeadlessException e) {
+    }
+        }
+    }//GEN-LAST:event_btncariActionPerformed
 
 
     public static void main(String args[]) {
