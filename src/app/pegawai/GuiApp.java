@@ -532,7 +532,7 @@ public void refresh(){
 
     private void btncariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncariActionPerformed
         if ((txtcari.getText().length()==0) || (cmbkat.getSelectedItem()=="")){
-         JOptionPane.showMessageDialog(null, " Data Tidak Lengkap!!!");
+         JOptionPane.showMessageDialog(null, " Data Tidak Lengkap!!!!");
         }else{
         try {
         Connection conn =(Connection)app.pegawai.Database.koneksiDB();
