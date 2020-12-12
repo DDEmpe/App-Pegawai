@@ -14,16 +14,38 @@ public class GuiApp extends javax.swing.JFrame {
 
    Boolean vsimpan;
    String id;
+
     private void GetData(){ // menampilkan data dari database
     try {
         Connection conn =(Connection)app.pegawai.Database.koneksiDB();
         java.sql.Statement stm = conn.createStatement();
         java.sql.ResultSet sql = stm.executeQuery("select * from data");
         data.setModel(DbUtils.resultSetToTableModel(sql));
+
     }
     catch (SQLException | HeadlessException e) {
     }
 }
+    
+ public String autoid(){
+try {
+ Integer Count;
+        Connection conn =(Connection)app.pegawai.Database.koneksiDB();
+        java.sql.Statement stm = conn.createStatement();
+        java.sql.ResultSet sql = stm.executeQuery("select id from data order by id DESC");
+        if (!sql.next()){
+         Count = 1;
+        }else{
+         Count = sql.getInt("id")+1;
+        }
+        id = Integer.toString(Count);
+    }
+    catch (SQLException | HeadlessException e) {
+    }
+     return id;
+ }
+ 
+ 
 public void refresh(){
     txtnik.setText("");
     txtnam.setText("");
@@ -33,20 +55,37 @@ public void refresh(){
     txtno.setText("");
     txtcari.setText("");
     cmbkel.removeAllItems();
+    cmbkel.addItem("");
     cmbkel.addItem("Laki - Laki");
     cmbkel.addItem("Perempuan");
     cmbkat.removeAllItems();
+    cmbkat.addItem("");
     cmbkat.addItem("NIK");
     cmbkat.addItem("Nama");
     cmbstat.removeAllItems();
+    cmbstat.addItem("");
     cmbstat.addItem("Admin");
     cmbstat.addItem("Kantor");
     cmbstat.addItem("Security");
     cmbstat.addItem("Reseosionis");
-    id="0";
+    id=autoid();
     GetData();
     
     
+    txtnik.setEnabled(false);
+    txtnam.setEnabled(false);
+    txtumur.setEnabled(false);
+    txtal.setEnabled(false);
+    txtlahir.setEnabled(false);
+    txtno.setEnabled(false);
+    cmbkel.setEnabled(false);
+    cmbstat.setEnabled(false);
+    
+      btnin.setEnabled(true);
+      btnsim.setEnabled(false);
+      btnref.setEnabled(true);
+      btned.setEnabled(false);
+      btnhap.setEnabled(false);
 }
     public GuiApp() {
         initComponents();
@@ -113,6 +152,11 @@ public void refresh(){
         jLabel9.setText("Status");
 
         btnin.setText("Input");
+        btnin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btninActionPerformed(evt);
+            }
+        });
 
         btnsim.setText("Simpan");
         btnsim.addActionListener(new java.awt.event.ActionListener() {
@@ -129,6 +173,11 @@ public void refresh(){
         });
 
         btned.setText("Edit");
+        btned.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnedActionPerformed(evt);
+            }
+        });
 
         btnhap.setText("Hapus");
         btnhap.addActionListener(new java.awt.event.ActionListener() {
@@ -328,8 +377,8 @@ public void refresh(){
            vsimpan = true;
 
             }catch (SQLException | HeadlessException e){
-        refresh();
             }
+        refresh();
     }//GEN-LAST:event_btnhapActionPerformed
 
     private void btnkelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnkelActionPerformed
@@ -357,7 +406,7 @@ public void refresh(){
      
     try
     {
-        String sql = "insert into data Values ('" + peg.getnik() + "','" + peg.getnam()+ "','" + peg.getumr() + "','" + peg.getkel() + "','" + peg.getlah() + "','" + peg.getal() + "',,'" + peg.getno() +"', '" + peg.getstat() + "')";
+        String sql = "insert into data Values ('"+id+ "', '" + peg.getnik() + "','" + peg.getnam()+ "','" + peg.getumr() + "','" + peg.getkel() + "','" + peg.getlah() + "','" + peg.getal() + "','" + peg.getno() +"', '" + peg.getstat() + "')";
         java.sql.Connection conn = (java.sql.Connection)app.pegawai.Database.koneksiDB();
         java.sql.PreparedStatement pst = conn.prepareStatement(sql);
         pst.execute();
@@ -367,7 +416,7 @@ public void refresh(){
     }
     }else{
          try{
-        String sql = "update data set nik= '" + peg.getnik() +"',nama='" + peg.getnam() + "',umur='" + peg.getumr() + "',kelamin='" + peg.getkel() + "',lahir='" + peg.getlah() + "',alamat='" + peg.getal() + "',no='" + peg.getno() + "',jabatam='"+ peg.getstat() +"' where id='" + id + "'";
+        String sql = "update data set nik= '" + peg.getnik() +"',nama='" + peg.getnam() + "',umur='" + peg.getumr() + "',kelamin='" + peg.getkel() + "',lahir='" + peg.getlah() + "',alamat='" + peg.getal() + "',no='" + peg.getno() + "',jabatan='"+ peg.getstat() +"' where id='" + id + "'";
         java.sql.Connection conn = (java.sql.Connection)app.pegawai.Database.koneksiDB();
         java.sql.PreparedStatement pst = conn.prepareStatement(sql);
         pst.execute();
@@ -376,11 +425,11 @@ public void refresh(){
         JOptionPane.showMessageDialog(null, e);
     }
 }       
+        refresh();
     }//GEN-LAST:event_btnsimActionPerformed
 
     private void dataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dataMouseClicked
-      vsimpan = false;
-     try{
+   try{
         int row = data.getSelectedRow();
         String table_klik = (data.getModel().getValueAt(row, 0).toString());
           java.sql.Connection conn = (java.sql.Connection)app.pegawai.Database.koneksiDB();
@@ -407,14 +456,51 @@ public void refresh(){
          cmbstat.setSelectedItem(stat);
      }
      }catch (Exception e){}
-      btnin.enable(false);
-      btnsim.enable(false);
-      btnref.enable(true);
-      btned.enable(true);
-      btnhap.enable(true);
+      btnin.setEnabled(false);
+      btnsim.setEnabled(false);
+      btnref.setEnabled(true);
+      btned.setEnabled(true);
+      btnhap.setEnabled(true);
       
       
     }//GEN-LAST:event_dataMouseClicked
+
+    private void btninActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btninActionPerformed
+
+            vsimpan = true;
+    txtnik.setEnabled(true);
+    txtnam.setEnabled(true);
+    txtumur.setEnabled(true);
+    txtal.setEnabled(true);
+    txtlahir.setEnabled(true);
+    txtno.setEnabled(true);
+    cmbkel.setEnabled(true);
+    cmbstat.setEnabled(true);
+    
+      btnin.setEnabled(false);
+      btnsim.setEnabled(true);
+      btnref.setEnabled(true);
+      btned.setEnabled(false);
+      btnhap.setEnabled(false);
+    }//GEN-LAST:event_btninActionPerformed
+
+    private void btnedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnedActionPerformed
+    vsimpan = false;
+    txtnik.setEnabled(false);
+    txtnam.setEnabled(false);
+    txtumur.setEnabled(false);
+    txtal.setEnabled(false);
+    txtlahir.setEnabled(false);
+    txtno.setEnabled(false);
+    cmbkel.setEnabled(false);
+    cmbstat.setEnabled(false);
+    
+      btnin.setEnabled(false);
+      btnsim.setEnabled(true);
+      btnref.setEnabled(true);
+      btned.setEnabled(false);
+      btnhap.setEnabled(false);
+    }//GEN-LAST:event_btnedActionPerformed
 
 
     public static void main(String args[]) {

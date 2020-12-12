@@ -225,6 +225,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Input"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btninActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnsim">
           <Properties>
@@ -246,6 +249,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Edit"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnedActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnhap">
           <Properties>
