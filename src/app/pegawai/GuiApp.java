@@ -131,6 +131,8 @@ public void refresh(){
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setName("FramePeg"); // NOI18N
+        setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel1.setText("DATA PEGAWAI");
@@ -405,7 +407,12 @@ public void refresh(){
                         JOptionPane.QUESTION_MESSAGE, null, null, null);
         
         if(jawab == JOptionPane.YES_OPTION){
-            System.exit(0);
+            GuiMain main = new GuiMain();
+            main.Screenmenu();
+            
+            setVisible(false);
+            
+
         }
         
 
@@ -556,7 +563,7 @@ public void refresh(){
     }//GEN-LAST:event_btncariActionPerformed
 
 
-    public static void main(String args[]) {
+    public static void ScreenPegawai() {
 try {
     UIManager.setLookAndFeel( new FlatDarkLaf() );
 } catch( Exception ex ) {
