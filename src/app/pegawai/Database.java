@@ -2,6 +2,7 @@
 package app.pegawai;
 
 
+import java.awt.HeadlessException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -23,5 +24,26 @@ public class Database { // koneksi ke database
             }
         }
         return mysqlkonek;
+    }
+    public boolean CariData(String text){
+        Boolean ada;
+        ada=false;
+        try
+        {
+            java.sql.Connection conn = (java.sql.Connection)app.pegawai.Database.koneksiDB();
+            java.sql.Statement stm = conn.createStatement();
+            java.sql.ResultSet sql = stm.executeQuery(text);
+     if(sql.next()){
+          ada=true; 
+         
+     }else{
+         ada=false;
+         
+     }
+   
+        }catch (SQLException | HeadlessException e) {
+    }
+
+      return ada; 
     }
 }

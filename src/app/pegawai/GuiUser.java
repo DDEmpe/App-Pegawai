@@ -21,9 +21,28 @@ import net.proteanit.sql.DbUtils;
 
 public class GuiUser extends javax.swing.JFrame {
 
+    private String id;
     /**
      * Creates new form GuiUser
      */
+     public String autoid(){
+try {
+ Integer Count;
+        Connection conn =(Connection)app.pegawai.Database.koneksiDB();
+        java.sql.Statement stm = conn.createStatement();
+        java.sql.ResultSet sql = stm.executeQuery("select id from user order by id DESC");
+        if (!sql.next()){
+         Count = 1;
+        }else{
+         Count = sql.getInt("id")+1;
+        }
+        id = Integer.toString(Count);
+    }
+    catch (SQLException | HeadlessException e) {
+    }
+     return id;
+ }
+    
     public GuiUser() {
         initComponents();
         GetData();

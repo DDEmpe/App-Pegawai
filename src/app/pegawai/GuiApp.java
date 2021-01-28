@@ -439,29 +439,45 @@ public void refresh(){
      String sta =(String) cmbstat.getSelectedItem();
      String kel = (String) cmbkel.getSelectedItem();
      peg.setAppPegawai(ni,nam,al,no,kel,Lahir,sta,Umr);
+     String cari = "Select * from data where nik = '" + peg.getnik() + "' ";
+     Database db = new Database();
    if (vsimpan == true){
      try
     {
+        
+       
+       if (db.CariData(cari) == true) {
+           JOptionPane.showMessageDialog(null, " Data Sudah Ada!!!");
+       }else{
         String sql = "insert into data Values ('"+id+ "', '" + peg.getnik() + "','" + peg.getnam()+ "','" + peg.getumr() + "','" + peg.getkel() + "','" + peg.getlah() + "','" + peg.getal() + "','" + peg.getno() +"', '" + peg.getstat() + "')";
         java.sql.Connection conn = (java.sql.Connection)app.pegawai.Database.koneksiDB();
         java.sql.PreparedStatement pst = conn.prepareStatement(sql);
         pst.execute();
         JOptionPane.showMessageDialog(null, "Berhasil Disimpan");
+        refresh();
+       }
     } catch (SQLException | HeadlessException e){
         JOptionPane.showMessageDialog(null, e);
     }
+     
     }else{
          try{
+                    if (db.CariData(cari) == true) {
+           JOptionPane.showMessageDialog(null, " Data Sudah Ada!!!");
+       }else{
         String sql = "update data set nik= '" + peg.getnik() +"',nama='" + peg.getnam() + "',umur='" + peg.getumr() + "',kelamin='" + peg.getkel() + "',lahir='" + peg.getlah() + "',alamat='" + peg.getal() + "',no='" + peg.getno() + "',jabatan='"+ peg.getstat() +"' where id='" + id + "'";
         java.sql.Connection conn = (java.sql.Connection)app.pegawai.Database.koneksiDB();
         java.sql.PreparedStatement pst = conn.prepareStatement(sql);
         pst.execute();
         JOptionPane.showMessageDialog(null, "Berhasil Disimpan");
+          refresh();
+                    }
             }catch (SQLException | HeadlessException e){
         JOptionPane.showMessageDialog(null, e);
     }
+       
 }       
-        refresh();
+        
          }
     }//GEN-LAST:event_btnsimActionPerformed
 
