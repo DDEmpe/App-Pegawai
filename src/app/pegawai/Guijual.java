@@ -5,7 +5,9 @@
  */
 package app.pegawai;
 
+import com.formdev.flatlaf.FlatDarkLaf;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 
 /**
  *
@@ -47,6 +49,7 @@ public class Guijual extends javax.swing.JFrame {
         btnref = new javax.swing.JButton();
         btnedt = new javax.swing.JButton();
         btnhap = new javax.swing.JButton();
+        tgljual = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         data = new javax.swing.JTable();
@@ -108,6 +111,9 @@ public class Guijual extends javax.swing.JFrame {
 
         btnhap.setText("Hapus");
         jPanel1.add(btnhap, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 230, -1, -1));
+
+        tgljual.setText("TGL");
+        jPanel1.add(tgljual, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 800, 270));
 
@@ -206,7 +212,11 @@ int jawab = JOptionPane.showOptionDialog(this,
             java.util.logging.Logger.getLogger(Guijual.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+try {
+    UIManager.setLookAndFeel( new FlatDarkLaf() );
+} catch( Exception ex ) {
+    System.err.println( "Failed to initialize LaF" );
+}
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -240,6 +250,7 @@ int jawab = JOptionPane.showOptionDialog(this,
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel tgljual;
     private javax.swing.JTextField txtbay;
     private javax.swing.JTextField txthar;
     private javax.swing.JTextField txtjum;

@@ -164,12 +164,13 @@ public class GuiMain extends javax.swing.JFrame {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
        GuiApp peg = new GuiApp();
        peg.ScreenPegawai();
-       
+      setVisible(false);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         GuiUser user = new GuiUser();
         user.ScreenUser();
+        setVisible(false);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu2MouseClicked
@@ -187,26 +188,31 @@ public class GuiMain extends javax.swing.JFrame {
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
          GuiFurniture furn = new GuiFurniture();
          furn.ScreenFurn();
+         setVisible(false);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
             GuiJenis jen = new GuiJenis();
             jen.ScreenJenis();
+            setVisible(false);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
             GuiBahan bah = new GuiBahan();
             bah.ScreenBahan();
+            setVisible(false);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
             GuiBeli beli = new GuiBeli();
             beli.ScreenBeli();
+            setVisible(false);
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
             Guijual jual = new Guijual();
             jual.ScreenJual();
+            setVisible(false);
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     /**
