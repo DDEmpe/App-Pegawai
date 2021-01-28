@@ -10,6 +10,44 @@ package app.pegawai;
  * @author deric
  */
 public class transaksi {
+String jenistrans;
+double harga, total;
+int jumlah;
 
+public transaksi(){
+    jenistrans="";
+    harga = 0;
+    total = 0;
+    jumlah = 0;
+}
+
+public void setTrans(String jenis){
+   jenistrans = jenis;
+}
+
+public void setHarga(double Harga){
+  harga = Harga;
+}
+
+public void setJumlah(int Jumlah){
+     jumlah = Jumlah;
+}
+
+public String getTrans(){
+    return jenistrans;
+}
+
+public double getHarga(){
+    return harga;
+}
+
+
+public int getJumlah(){
+    return jumlah;
+}
+public double getTotal(){
+    total=harga*jumlah;
+    return(total);
+}
 
 }
