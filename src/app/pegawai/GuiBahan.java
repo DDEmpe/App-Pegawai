@@ -27,18 +27,71 @@ public class GuiBahan extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jLabel1 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        txtbahan = new javax.swing.JTextField();
+        btnkel = new javax.swing.JButton();
+        btnin = new javax.swing.JButton();
+        btntam = new javax.swing.JButton();
+        btnref = new javax.swing.JButton();
+        btnedt = new javax.swing.JButton();
+        btnhap = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        data = new javax.swing.JTable();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel1.setText("BAHAN");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 10, -1, -1));
+
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel2.setText("Nama Bahan");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, -1));
+        jPanel1.add(txtbahan, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 50, 140, 30));
+
+        btnkel.setText("Keluar");
+        jPanel1.add(btnkel, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 110, -1, -1));
+
+        btnin.setText("input");
+        jPanel1.add(btnin, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, -1, -1));
+
+        btntam.setText("Tambah");
+        jPanel1.add(btntam, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, -1, -1));
+
+        btnref.setText("Refresh");
+        jPanel1.add(btnref, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 110, -1, -1));
+
+        btnedt.setText("Edit");
+        jPanel1.add(btnedt, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 110, -1, -1));
+
+        btnhap.setText("Hapus");
+        jPanel1.add(btnhap, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 110, -1, -1));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 430, 140));
+
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        data.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(data);
+
+        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 426, 160));
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -46,7 +99,7 @@ public class GuiBahan extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void ScreenBahan() {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -79,5 +132,18 @@ public class GuiBahan extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnedt;
+    private javax.swing.JButton btnhap;
+    private javax.swing.JButton btnin;
+    private javax.swing.JButton btnkel;
+    private javax.swing.JButton btnref;
+    private javax.swing.JButton btntam;
+    private javax.swing.JTable data;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField txtbahan;
     // End of variables declaration//GEN-END:variables
 }

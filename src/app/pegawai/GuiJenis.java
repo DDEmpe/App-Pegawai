@@ -27,26 +27,142 @@ public class GuiJenis extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        btnkel = new javax.swing.JButton();
+        btnin = new javax.swing.JButton();
+        btntam = new javax.swing.JButton();
+        btnref = new javax.swing.JButton();
+        btnedt = new javax.swing.JButton();
+        btnhap = new javax.swing.JButton();
+        txtjen = new javax.swing.JTextField();
+        jPanel2 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        data = new javax.swing.JTable();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel1.setText("JENIS");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 10, -1, -1));
+
+        jLabel2.setText("Nama Jenis");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, -1, -1));
+
+        btnkel.setText("Keluar");
+        btnkel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnkelActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnkel, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 110, -1, -1));
+
+        btnin.setText("Input");
+        btnin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btninActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnin, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, -1, -1));
+
+        btntam.setText("Tambah");
+        btntam.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btntamActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btntam, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, -1, -1));
+
+        btnref.setText("Refresh");
+        btnref.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnrefActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnref, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 110, -1, -1));
+
+        btnedt.setText("Edit");
+        btnedt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnedtActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnedt, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 110, -1, -1));
+
+        btnhap.setText("Hapus");
+        btnhap.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnhapActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnhap, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 110, -1, -1));
+
+        txtjen.setText("jTextField1");
+        jPanel1.add(txtjen, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 50, 160, 30));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 150));
+
+        data.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(data);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
         );
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 400, 150));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnkelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnkelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnkelActionPerformed
+
+    private void btninActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btninActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btninActionPerformed
+
+    private void btntamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btntamActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btntamActionPerformed
+
+    private void btnrefActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnrefActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnrefActionPerformed
+
+    private void btnedtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnedtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnedtActionPerformed
+
+    private void btnhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnhapActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnhapActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void ScreenJenis() {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -79,5 +195,18 @@ public class GuiJenis extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnedt;
+    private javax.swing.JButton btnhap;
+    private javax.swing.JButton btnin;
+    private javax.swing.JButton btnkel;
+    private javax.swing.JButton btnref;
+    private javax.swing.JButton btntam;
+    private javax.swing.JTable data;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField txtjen;
     // End of variables declaration//GEN-END:variables
 }
