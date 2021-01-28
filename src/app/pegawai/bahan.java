@@ -9,19 +9,19 @@ package app.pegawai;
  *
  * @author deric
  */
-public class jenis extends furniture {
-String jenis;
+public class bahan extends furniture {
+String bahan;
 
-public jenis(){
-    jenis ="";
+public bahan(){
+    bahan="";
 }
 @Override
-public void setJenis(String jen){
-    jenis = jen;
+public void setBahan(String bah){
+    bahan = bah;
 }
 @Override
-public String getJenis(){
-    return(jenis);
+public String getBahan(){
+    return (bahan);
 }
 
 }
