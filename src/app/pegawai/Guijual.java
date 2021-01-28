@@ -27,18 +27,130 @@ public class Guijual extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jPanel1 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        cmbfurn = new javax.swing.JComboBox<>();
+        txtkode = new javax.swing.JTextField();
+        txtjum = new javax.swing.JTextField();
+        txthar = new javax.swing.JTextField();
+        txttot = new javax.swing.JTextField();
+        btnbat = new javax.swing.JButton();
+        btnin = new javax.swing.JButton();
+        btntam = new javax.swing.JButton();
+        btnref = new javax.swing.JButton();
+        btnedt = new javax.swing.JButton();
+        btnhap = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        data = new javax.swing.JTable();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        btnbay = new javax.swing.JButton();
+        btnkel = new javax.swing.JButton();
+        biaya = new javax.swing.JLabel();
+        txtkem = new javax.swing.JTextField();
+        txtbay = new javax.swing.JTextField();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 975, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 480, Short.MAX_VALUE)
-        );
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        jLabel4.setText("TRANSAKSI JUAL");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 10, -1, -1));
+
+        jLabel6.setText("Kode");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, -1));
+
+        jLabel7.setText("Nama");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, -1));
+
+        jLabel8.setText("Jumlah");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, -1));
+
+        jLabel9.setText("Harga");
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 60, -1, -1));
+
+        jLabel10.setText("Total");
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 100, -1, -1));
+
+        cmbfurn.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jPanel1.add(cmbfurn, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, 150, -1));
+        jPanel1.add(txtkode, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, 150, -1));
+        jPanel1.add(txtjum, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, 150, -1));
+        jPanel1.add(txthar, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 60, 150, -1));
+        jPanel1.add(txttot, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 100, 150, 20));
+
+        btnbat.setText("Batal");
+        jPanel1.add(btnbat, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 230, -1, -1));
+
+        btnin.setText("Input");
+        jPanel1.add(btnin, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, -1, -1));
+
+        btntam.setText("Tambah");
+        jPanel1.add(btntam, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 230, -1, -1));
+
+        btnref.setText("Refresh");
+        jPanel1.add(btnref, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 230, -1, -1));
+
+        btnedt.setText("Edit");
+        jPanel1.add(btnedt, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 230, -1, -1));
+
+        btnhap.setText("Hapus");
+        jPanel1.add(btnhap, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 230, -1, -1));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 800, 270));
+
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        data.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(data);
+
+        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 140));
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, 810, 140));
+
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setText("Biaya");
+        jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, 10));
+
+        jLabel2.setText("Bayar");
+        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
+
+        jLabel3.setText("Kembalian");
+        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
+
+        btnbay.setText("Bayar");
+        jPanel3.add(btnbay, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 70, -1, -1));
+
+        btnkel.setText("Keluar");
+        jPanel3.add(btnkel, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 70, -1, -1));
+
+        biaya.setText("Rp.");
+        jPanel3.add(biaya, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 30, -1, -1));
+        jPanel3.add(txtkem, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 80, 150, -1));
+        jPanel3.add(txtbay, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, 150, -1));
+
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 410, 810, 110));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -79,5 +191,35 @@ public class Guijual extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel biaya;
+    private javax.swing.JButton btnbat;
+    private javax.swing.JButton btnbay;
+    private javax.swing.JButton btnedt;
+    private javax.swing.JButton btnhap;
+    private javax.swing.JButton btnin;
+    private javax.swing.JButton btnkel;
+    private javax.swing.JButton btnref;
+    private javax.swing.JButton btntam;
+    private javax.swing.JComboBox<String> cmbfurn;
+    private javax.swing.JTable data;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField txtbay;
+    private javax.swing.JTextField txthar;
+    private javax.swing.JTextField txtjum;
+    private javax.swing.JTextField txtkem;
+    private javax.swing.JTextField txtkode;
+    private javax.swing.JTextField txttot;
     // End of variables declaration//GEN-END:variables
 }
