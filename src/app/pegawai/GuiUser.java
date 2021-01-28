@@ -171,6 +171,11 @@ try {
         jPanel1.add(btnin, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 10, -1, -1));
 
         btntam.setText("Tambah");
+        btntam.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btntamActionPerformed(evt);
+            }
+        });
         jPanel1.add(btntam, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 40, -1, -1));
 
         btnref.setText("Refresh");
@@ -365,6 +370,10 @@ try {
       btnedt.setEnabled(true);
       btnhap.setEnabled(true);
     }//GEN-LAST:event_dataMouseClicked
+
+    private void btntamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btntamActionPerformed
+
+    }//GEN-LAST:event_btntamActionPerformed
 
     /**
      * @param args the command line arguments
