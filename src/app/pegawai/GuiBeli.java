@@ -5,6 +5,8 @@
  */
 package app.pegawai;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author deric
@@ -156,6 +158,11 @@ public class GuiBeli extends javax.swing.JFrame {
         jPanel3.add(ttxkem, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 80, 80, -1));
 
         btnkel.setText("Keluar");
+        btnkel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnkelActionPerformed(evt);
+            }
+        });
         jPanel3.add(btnkel, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 80, -1, -1));
 
         btnbay.setText("Bayar");
@@ -165,6 +172,24 @@ public class GuiBeli extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnkelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnkelActionPerformed
+int jawab = JOptionPane.showOptionDialog(this, 
+                        "Ingin Keluar?", 
+                        "Keluar", 
+                        JOptionPane.YES_NO_OPTION, 
+                        JOptionPane.QUESTION_MESSAGE, null, null, null);
+        
+        if(jawab == JOptionPane.YES_OPTION){
+            GuiMain main = new GuiMain();
+            main.Screenmenu();
+            
+            setVisible(false);
+            
+
+        
+        }            // TODO add your handling code here:
+    }//GEN-LAST:event_btnkelActionPerformed
 
     /**
      * @param args the command line arguments

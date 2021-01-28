@@ -5,6 +5,8 @@
  */
 package app.pegawai;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author deric
@@ -134,7 +136,21 @@ public class GuiJenis extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnkelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnkelActionPerformed
-        // TODO add your handling code here:
+int jawab = JOptionPane.showOptionDialog(this, 
+                        "Ingin Keluar?", 
+                        "Keluar", 
+                        JOptionPane.YES_NO_OPTION, 
+                        JOptionPane.QUESTION_MESSAGE, null, null, null);
+        
+        if(jawab == JOptionPane.YES_OPTION){
+            GuiMain main = new GuiMain();
+            main.Screenmenu();
+            
+            setVisible(false);
+            
+
+        
+        }            // TODO add your handling code here:
     }//GEN-LAST:event_btnkelActionPerformed
 
     private void btninActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btninActionPerformed
