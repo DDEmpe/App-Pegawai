@@ -372,7 +372,64 @@ try {
     }//GEN-LAST:event_dataMouseClicked
 
     private void btntamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btntamActionPerformed
-
+        user us = new user();
+        String pass1,pass2,user,nik,cari,hash;
+        pass1 = new String(txtpass1.getPassword());
+        pass2 = new String(txtpass2.getPassword());
+                     cari = "Select * from user where nik = '" + us.getNik() + "' ";
+                     md5 md = new md5();
+            Database db = new Database();
+       if ((txtuser.getText().length()==0) || (cmbnik.getSelectedItem()=="")|| (pass1.length()==0) || (pass2.length()==0)){
+           JOptionPane.showMessageDialog(null, " Data Tidak Lengkap!!!");
+  }else{
+           if (pass1 != pass2){
+               JOptionPane.showMessageDialog(null, " Password Tidak Sama");
+           }else{
+               
+               user = txtuser.getText();
+               nik =(String) cmbnik.getSelectedItem();
+               us.setNik(nik);
+               us.setUser(user);
+               us.setPass(pass1);
+           }
+           if (vsimpan == true){
+     try
+     {     
+       if (db.CariData(cari) == true) {
+           JOptionPane.showMessageDialog(null, " Data Sudah Ada!!!");
+       }else{
+           hash = md.getMd5(us.getPass());
+        String sql = "insert into data Values ('"+id+ "', '" + us.getNik() + "','" + us.getUser()+ "','" + hash + "')";
+        java.sql.Connection conn = (java.sql.Connection)app.pegawai.Database.koneksiDB();
+        java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+        pst.execute();
+        JOptionPane.showMessageDialog(null, "Berhasil Disimpan");
+        refresh();
+       }
+    } catch (SQLException | HeadlessException e){
+        JOptionPane.showMessageDialog(null, e);
+    }
+     
+    }else{
+         try{
+                    if (db.CariData(cari) == true) {
+           JOptionPane.showMessageDialog(null, " Data Sudah Ada!!!");
+       }else{
+                        hash = md.getMd5(us.getPass());
+                   
+        String sql = "update data set nik= '" + us.getNik() +"',username='" + us.getUser() + "',password='" + hash + "' where id='" + id + "'";
+        java.sql.Connection conn = (java.sql.Connection)app.pegawai.Database.koneksiDB();
+        java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+        pst.execute();
+        JOptionPane.showMessageDialog(null, "Berhasil Disimpan");
+          refresh();
+                    }
+            }catch (SQLException | HeadlessException e){
+        JOptionPane.showMessageDialog(null, e);
+    }
+       
+}        
+       }
     }//GEN-LAST:event_btntamActionPerformed
 
     /**

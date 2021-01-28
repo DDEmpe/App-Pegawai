@@ -9,10 +9,10 @@ package app.pegawai;
 public class user {
 String username,password,nik;
 
-    public user(String user,String pass,String nik ){
-        username=user;
-        password=pass;
-        this.nik=nik;
+    public user( ){
+        username="";
+        password="";
+        nik="";
     }
     
     public void setUser(String user){
