@@ -38,6 +38,7 @@ public class GuiLogin extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         txtpass = new javax.swing.JPasswordField();
+        chkshow = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -62,6 +63,13 @@ public class GuiLogin extends javax.swing.JFrame {
             }
         });
 
+        chkshow.setText("Show");
+        chkshow.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkshowActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -82,10 +90,15 @@ public class GuiLogin extends javax.swing.JFrame {
                                 .addComponent(jLabel1)
                                 .addGap(18, 18, 18)
                                 .addComponent(txtuser, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(51, 51, 51)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(51, 51, 51)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(chkshow)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton2)))))
                 .addGap(18, 18, 18))
         );
         layout.setVerticalGroup(
@@ -110,7 +123,9 @@ public class GuiLogin extends javax.swing.JFrame {
                         .addComponent(jButton2))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(txtpass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtpass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(chkshow))))
                 .addContainerGap(28, Short.MAX_VALUE))
         );
 
@@ -119,12 +134,15 @@ public class GuiLogin extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String sql;
-        String pass;
+        String pass,user;
         
         Database db = new Database();
         pass =new String( txtpass.getPassword());
-        
-        sql = "Select * from user where username = '"+ txtuser.getText()+ "' AND pass=MD5( '"+ pass + "') ";
+        user = txtuser.getText();
+        login log = new login(user,pass);
+        log.setUser(user);
+        log.setPass(pass);
+        sql = "Select * from user where username = '"+ log.getUser() + "' AND pass=MD5( '"+ log.getPass() + "') ";
         if (db.CariData(sql)==true){
             JOptionPane.showMessageDialog(null, " Berhasil Login!!");
         GuiMain mn = new GuiMain();
@@ -152,6 +170,14 @@ int jawab = JOptionPane.showOptionDialog(this,
         }// TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void chkshowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkshowActionPerformed
+        if (chkshow.isSelected()){
+            txtpass.setEchoChar((char)0);
+        }else{
+            txtpass.setEchoChar('*');
+        }
+    }//GEN-LAST:event_chkshowActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -170,6 +196,7 @@ try {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBox chkshow;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
