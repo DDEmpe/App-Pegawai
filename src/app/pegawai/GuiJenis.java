@@ -100,8 +100,6 @@ public class GuiJenis extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnhap, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 110, -1, -1));
-
-        txtjen.setText("jTextField1");
         jPanel1.add(txtjen, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 50, 160, 30));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 150));
