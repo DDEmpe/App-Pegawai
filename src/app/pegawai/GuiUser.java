@@ -376,22 +376,21 @@ try {
         String pass1,pass2,user,nik,cari,hash;
         pass1 = new String(txtpass1.getPassword());
         pass2 = new String(txtpass2.getPassword());
-                     cari = "Select * from user where nik = '" + us.getNik() + "' ";
-                     md5 md = new md5();
+        cari = "Select * from user where username = '" + txtuser.getText() + "' ";
+            md5 md = new md5();
             Database db = new Database();
        if ((txtuser.getText().length()==0) || (cmbnik.getSelectedItem()=="")|| (pass1.length()==0) || (pass2.length()==0)){
            JOptionPane.showMessageDialog(null, " Data Tidak Lengkap!!!");
   }else{
-           if (pass1 != pass2){
-               JOptionPane.showMessageDialog(null, " Password Tidak Sama");
-           }else{
+           if (pass1.equals(pass2)){
+               
                
                user = txtuser.getText();
                nik =(String) cmbnik.getSelectedItem();
                us.setNik(nik);
                us.setUser(user);
                us.setPass(pass1);
-           }
+           
            if (vsimpan == true){
      try
      {     
@@ -399,7 +398,7 @@ try {
            JOptionPane.showMessageDialog(null, " Data Sudah Ada!!!");
        }else{
            hash = md.getMd5(us.getPass());
-        String sql = "insert into data Values ('"+id+ "', '" + us.getNik() + "','" + us.getUser()+ "','" + hash + "')";
+        String sql = "insert into user Values ('"+id+ "', '" + us.getNik() + "','" + us.getUser()+ "','" + hash + "')";
         java.sql.Connection conn = (java.sql.Connection)app.pegawai.Database.koneksiDB();
         java.sql.PreparedStatement pst = conn.prepareStatement(sql);
         pst.execute();
@@ -417,7 +416,7 @@ try {
        }else{
                         hash = md.getMd5(us.getPass());
                    
-        String sql = "update data set nik= '" + us.getNik() +"',username='" + us.getUser() + "',password='" + hash + "' where id='" + id + "'";
+        String sql = "update user set nik= '" + us.getNik() +"',username='" + us.getUser() + "',password='" + hash + "' where id='" + id + "'";
         java.sql.Connection conn = (java.sql.Connection)app.pegawai.Database.koneksiDB();
         java.sql.PreparedStatement pst = conn.prepareStatement(sql);
         pst.execute();
@@ -426,9 +425,12 @@ try {
                     }
             }catch (SQLException | HeadlessException e){
         JOptionPane.showMessageDialog(null, e);
-    }
+                    }
        
-}        
+               }        
+           }
+           else{JOptionPane.showMessageDialog(null, " Password Tidak Sama");
+       }
        }
     }//GEN-LAST:event_btntamActionPerformed
 
