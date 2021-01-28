@@ -20,8 +20,6 @@ public class GuiMain extends javax.swing.JFrame {
     public GuiMain() {
         initComponents();
         setTgl();
-        status sta = new status();
-        lblstatus.setText ( sta.getStatus());
     }
 
    
@@ -43,8 +41,6 @@ public class GuiMain extends javax.swing.JFrame {
 
         menuBar1 = new java.awt.MenuBar();
         menu1 = new java.awt.Menu();
-        jPanel1 = new javax.swing.JPanel();
-        lblstatus = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         lbltanggal = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -64,9 +60,6 @@ public class GuiMain extends javax.swing.JFrame {
         menuBar1.add(menu1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        lblstatus.setText("status");
-        jPanel1.add(lblstatus);
 
         lbltanggal.setText("time");
         jPanel2.add(lbltanggal);
@@ -129,8 +122,7 @@ public class GuiMain extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(166, 166, 166)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -138,9 +130,7 @@ public class GuiMain extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(250, 250, 250)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -199,9 +189,7 @@ try {
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JLabel lblstatus;
     private javax.swing.JLabel lbltanggal;
     private java.awt.Menu menu1;
     private java.awt.MenuBar menuBar1;

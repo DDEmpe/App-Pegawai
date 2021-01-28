@@ -147,8 +147,7 @@ public class GuiLogin extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, " Berhasil Login!!");
         GuiMain mn = new GuiMain();
          setVisible(false);
-         status sta = new status();
-         sta.setStatus(user);
+
          mn.Screenmenu();     
         }else
         {
