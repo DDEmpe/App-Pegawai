@@ -12,6 +12,7 @@ package app.pegawai;
 public class furniture {
 String nama,jenis,bahan;
 double harga;
+int jumlah;
 
 public furniture(){
     nama="";
@@ -25,15 +26,19 @@ public void setNama(String nam){
 }
 
 public void setJenis(String jen){
-    
+    jenis = jen;
 }
 
 public void setBahan(String bah){
-    
+    bahan = bah;
 }
 
 public void setHarga(double Harga){
     harga = Harga;
+}
+
+public void setJumlah(int jum){
+    jumlah = jum;
 }
 
 public String getNama(){
@@ -48,6 +53,10 @@ public String getBahan(){
 }
 public double getHarga(){
     return harga;
+}
+
+public int getJumlah(){
+    return jumlah;
 }
 
  

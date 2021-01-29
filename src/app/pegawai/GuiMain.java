@@ -52,7 +52,6 @@ public class GuiMain extends javax.swing.JFrame {
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
-        jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
@@ -113,14 +112,6 @@ public class GuiMain extends javax.swing.JFrame {
         jMenuBar1.add(jMenu3);
 
         jMenu4.setText("Transaksi");
-
-        jMenuItem6.setText("Transaksi Beli");
-        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem6ActionPerformed(evt);
-            }
-        });
-        jMenu4.add(jMenuItem6);
 
         jMenuItem7.setText("Transaksi Jual");
         jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
@@ -203,12 +194,6 @@ public class GuiMain extends javax.swing.JFrame {
             setVisible(false);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
-    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-            GuiBeli beli = new GuiBeli();
-            beli.ScreenBeli();
-            setVisible(false);
-    }//GEN-LAST:event_jMenuItem6ActionPerformed
-
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
             Guijual jual = new Guijual();
             jual.ScreenJual();
@@ -243,7 +228,6 @@ try {
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lbltanggal;

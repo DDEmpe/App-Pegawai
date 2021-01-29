@@ -10,7 +10,7 @@ package app.pegawai;
  * @author deric
  */
 public class transaksi {
-String jenistrans;
+String jenistrans,kode,nama;
 double harga, total;
 int jumlah;
 
@@ -19,6 +19,14 @@ public transaksi(){
     harga = 0;
     total = 0;
     jumlah = 0;
+}
+
+public void setKode(String kode){
+    this.kode = kode;
+}
+
+public void setNama(String nama){
+    this.nama = nama;
 }
 
 public void setTrans(String jenis){
@@ -33,6 +41,14 @@ public void setJumlah(int Jumlah){
      jumlah = Jumlah;
 }
 
+public String getKode(){
+    return kode;
+}
+
+public String getNama(){
+    return nama;
+}
+
 public String getTrans(){
     return jenistrans;
 }
@@ -40,7 +56,6 @@ public String getTrans(){
 public double getHarga(){
     return harga;
 }
-
 
 public int getJumlah(){
     return jumlah;

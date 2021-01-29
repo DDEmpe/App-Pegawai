@@ -331,7 +331,7 @@ try {
             
          
         try{
-            String sql = "delete from user where id = '"+ idut +"'";
+            String sql = "delete from user where id = '"+ id +"'";
             java.sql.Connection conn = (java.sql.Connection)app.pegawai.Database.koneksiDB();
             java.sql.PreparedStatement pst = conn.prepareStatement(sql);
             pst.execute();

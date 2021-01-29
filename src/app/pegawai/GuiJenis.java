@@ -6,22 +6,71 @@
 package app.pegawai;
 
 import com.formdev.flatlaf.FlatDarkLaf;
+import java.awt.HeadlessException;
+import java.sql.Connection;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
+import net.proteanit.sql.DbUtils;
 
 /**
  *
  * @author deric
  */
 public class GuiJenis extends javax.swing.JFrame {
-
+ String id;
+ boolean vsimpan;
     /**
      * Creates new form GuiJenis
      */
     public GuiJenis() {
         initComponents();
+        refresh();
     }
+    
+    public String autoid(){
+try {
+ Integer Count;
+        Connection conn =(Connection)app.pegawai.Database.koneksiDB();
+        java.sql.Statement stm = conn.createStatement();
+        java.sql.ResultSet sql = stm.executeQuery("select id from jenis order by id DESC");
+        if (!sql.next()){
+         Count = 1;
+        }else{
+         Count = sql.getInt("id")+1;
+        }
+        id = Integer.toString(Count);
+    }
+    catch (SQLException | HeadlessException e) {
+    }
+     return id;
+ }
+    
+        private void GetData(){ // menampilkan data dari database
+    try {
+        Connection conn =(Connection)app.pegawai.Database.koneksiDB();
+        java.sql.Statement stm = conn.createStatement();
+        java.sql.ResultSet sql = stm.executeQuery("select * from jenis");
+        data.setModel(DbUtils.resultSetToTableModel(sql));
 
+    }
+    catch (SQLException | HeadlessException e) {
+    }
+}
+    public void refresh(){
+        txtjen.setText("");
+        
+        txtjen.setEnabled(false);
+        
+        btnin.setEnabled(true);
+        btntam.setEnabled(false);
+        btnref.setEnabled(false);
+        btnedt.setEnabled(false);
+        btnhap.setEnabled(false);
+        GetData();
+        id=autoid();
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -63,7 +112,7 @@ public class GuiJenis extends javax.swing.JFrame {
                 btnkelActionPerformed(evt);
             }
         });
-        jPanel1.add(btnkel, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 110, -1, -1));
+        jPanel1.add(btnkel, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 110, -1, -1));
 
         btnin.setText("Input");
         btnin.addActionListener(new java.awt.event.ActionListener() {
@@ -103,7 +152,7 @@ public class GuiJenis extends javax.swing.JFrame {
                 btnhapActionPerformed(evt);
             }
         });
-        jPanel1.add(btnhap, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 110, -1, -1));
+        jPanel1.add(btnhap, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 110, -1, -1));
         jPanel1.add(txtjen, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 50, 160, 30));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 150));
@@ -119,6 +168,11 @@ public class GuiJenis extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        data.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                dataMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(data);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -156,24 +210,131 @@ int jawab = JOptionPane.showOptionDialog(this,
     }//GEN-LAST:event_btnkelActionPerformed
 
     private void btninActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btninActionPerformed
-        // TODO add your handling code here:
+vsimpan = true;
+
+txtjen.setEnabled(true);
+
+ btnin.setEnabled(false);
+    btntam.setEnabled(true);
+    btnedt.setEnabled(false);
+    btnhap.setEnabled(false);
+    btnref.setEnabled(true);
     }//GEN-LAST:event_btninActionPerformed
 
     private void btntamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btntamActionPerformed
-        // TODO add your handling code here:
+ furniture us = new jenis();
+        String jenis,cari;
+        
+        cari = "Select * from jenis where jenis = '" + txtjen.getText() + "' ";
+
+            Database db = new Database();
+       if ((txtjen.getText().length()==0) ){
+           JOptionPane.showMessageDialog(null, " Data Tidak Lengkap!!!");
+  }else{
+
+               
+               jenis = txtjen.getText();
+               us.setJenis(jenis);
+           
+           if (vsimpan == true){
+     try
+     {     
+       if (db.CariData(cari) == true) {
+           JOptionPane.showMessageDialog(null, " Data Sudah Ada!!!");
+       }else{
+        String sql = "insert into jenis Values ('"+id+ "', '" + us.getJenis() + "')";
+        java.sql.Connection conn = (java.sql.Connection)app.pegawai.Database.koneksiDB();
+        java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+        pst.execute();
+        JOptionPane.showMessageDialog(null, "Berhasil Disimpan");
+        refresh();
+       }
+    } catch (SQLException | HeadlessException e){
+        JOptionPane.showMessageDialog(null, e);
+    }
+     
+    }else{
+         try{
+                    if (db.CariData(cari) == true) {
+           JOptionPane.showMessageDialog(null, " Data Sudah Ada!!!");
+       }else{
+    
+                   
+        String sql = "update jenis set jenis= '" + us.getJenis() +"' where id='" + id + "'";
+        java.sql.Connection conn = (java.sql.Connection)app.pegawai.Database.koneksiDB();
+        java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+        pst.execute();
+        JOptionPane.showMessageDialog(null, "Berhasil Disimpan");
+          refresh();
+                    }
+            }catch (SQLException | HeadlessException e){
+        JOptionPane.showMessageDialog(null, e);
+                    }
+       
+               }        
+   
+       }        // TODO add your handling code here:
     }//GEN-LAST:event_btntamActionPerformed
 
     private void btnrefActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnrefActionPerformed
-        // TODO add your handling code here:
+refresh();        // TODO add your handling code here:
     }//GEN-LAST:event_btnrefActionPerformed
 
     private void btnedtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnedtActionPerformed
-        // TODO add your handling code here:
+vsimpan = false;
+
+txtjen.setEnabled(true);
+
+ btnin.setEnabled(false);
+    btntam.setEnabled(true);
+    btnedt.setEnabled(false);
+    btnhap.setEnabled(false);
+    btnref.setEnabled(true);        // TODO add your handling code here:
     }//GEN-LAST:event_btnedtActionPerformed
 
     private void btnhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnhapActionPerformed
-        // TODO add your handling code here:
+   int jawab = JOptionPane.showOptionDialog(this, 
+                        "Ingin Menghapus Data??", 
+                        "Hapus Data", 
+                        JOptionPane.YES_NO_OPTION, 
+                        JOptionPane.QUESTION_MESSAGE, null, null, null);
+        
+        if(jawab == JOptionPane.YES_OPTION){
+            
+         
+        try{
+            String sql = "delete from jenis where id = '"+ id +"'";
+            java.sql.Connection conn = (java.sql.Connection)app.pegawai.Database.koneksiDB();
+            java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+            pst.execute();
+            JOptionPane.showMessageDialog(null, " Data Telah Terhapus");
+            }catch (SQLException | HeadlessException e){
+            }
+        refresh();
+        }        // TODO add your handling code here:
     }//GEN-LAST:event_btnhapActionPerformed
+
+    private void dataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dataMouseClicked
+try{
+        int row = data.getSelectedRow();
+        String table_klik = (data.getModel().getValueAt(row, 0).toString());
+          java.sql.Connection conn = (java.sql.Connection)app.pegawai.Database.koneksiDB();
+            java.sql.Statement stm = conn.createStatement();
+            java.sql.ResultSet sql = stm.executeQuery("Select * from jenis where id = '"+table_klik+"'");
+     if(sql.next()){
+         id = sql.getString("id");
+         
+         String jenis = sql.getString("jenis");
+         txtjen.setText(jenis);
+
+     }
+     }catch (Exception e){}
+      btnin.setEnabled(false);
+      btntam.setEnabled(false);
+      btnref.setEnabled(true);
+      btnedt.setEnabled(true);
+      btnhap.setEnabled(true);         // TODO add your handling code here:
+    }//GEN-LAST:event_dataMouseClicked
 
     /**
      * @param args the command line arguments
