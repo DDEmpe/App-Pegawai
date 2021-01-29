@@ -21,6 +21,7 @@ public class Guijual extends javax.swing.JFrame {
  String id;
  boolean vsimpan;
  int tot;
+ boolean vedit;
  double bay,temp_bay;
  
  
@@ -111,7 +112,7 @@ try {
      isiBah();
      txttot.setText("");
      
-     
+     GetData();
        txtkode.setEnabled(false);
          cmbjen.setEnabled(true);
          cmbbah.setEnabled(true);
@@ -130,21 +131,27 @@ try {
  }
  public void batal(){
      txtkode.setText(autokode());
-      txtjum.setText("");
+     txtjum.setText("");
      txthar.setText("");
+     txtbay.setText("");
+     txtkem.setText("");
      isiJen();
      isiBah();
      txttot.setText("");
      bay = 0;
-     biaya.setText(Double.toString(bay));
+     biaya.setText("Rp. "+Double.toString(bay));
+     GetData();
      
-            txtkode.setEnabled(false);
+         txtkode.setEnabled(false);
          cmbjen.setEnabled(false);
          cmbbah.setEnabled(false);
          cmbfurn.setEnabled(false);
          txtjum.setEnabled(false);
          txthar.setEnabled(false);
          txttot.setEnabled(false);
+         btnbay.setEnabled(false);
+         txtkem.setEnabled(false);
+         
          
          btnin.setEnabled(true);
          btntam.setEnabled(false);
@@ -200,9 +207,11 @@ try {
     public Guijual() {
         initComponents();
         batal();
+        GetData();
         isiJen();
         isiBah();
         time tm = new time();
+        tm.setTime();
         tgljual.setText(tm.getTime());
     }
 
@@ -238,9 +247,14 @@ try {
         cmbjen = new javax.swing.JComboBox<>();
         cmbbah = new javax.swing.JComboBox<>();
         btnhit = new javax.swing.JButton();
+        btnhit1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         data = new javax.swing.JTable();
+        jLabel5 = new javax.swing.JLabel();
+        txtcari = new javax.swing.JTextField();
+        btncari = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -250,6 +264,7 @@ try {
         biaya = new javax.swing.JLabel();
         txtkem = new javax.swing.JTextField();
         txtbay = new javax.swing.JTextField();
+        btnhitung2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -368,6 +383,14 @@ try {
         });
         jPanel1.add(btnhit, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 140, -1, -1));
 
+        btnhit1.setText("Hitung");
+        btnhit1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnhit1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnhit1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 140, -1, -1));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 800, 270));
 
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -383,9 +406,34 @@ try {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        data.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                dataMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(data);
 
-        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 140));
+        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 800, 110));
+
+        jLabel5.setText("Cari Data");
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+        jPanel2.add(txtcari, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, 290, -1));
+
+        btncari.setText("Cari");
+        btncari.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btncariActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btncari, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 10, -1, -1));
+
+        jButton1.setText("Refresh");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 10, -1, -1));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, 810, 140));
 
@@ -401,6 +449,11 @@ try {
         jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
 
         btnbay.setText("Bayar");
+        btnbay.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnbayActionPerformed(evt);
+            }
+        });
         jPanel3.add(btnbay, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 70, -1, -1));
 
         btnkel.setText("Keluar");
@@ -415,6 +468,14 @@ try {
         jPanel3.add(biaya, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 30, -1, -1));
         jPanel3.add(txtkem, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 80, 150, -1));
         jPanel3.add(txtbay, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, 150, -1));
+
+        btnhitung2.setText("Hitung");
+        btnhitung2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnhitung2ActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btnhitung2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 60, -1, -1));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 410, 810, 110));
 
@@ -455,8 +516,11 @@ int jawab = JOptionPane.showOptionDialog(this,
             java.sql.PreparedStatement pst = conn.prepareStatement(sql);
             pst.execute();
             JOptionPane.showMessageDialog(null, " Data Telah Terhapus");
+            
             }catch (SQLException | HeadlessException e){
             }
+        bay = bay - temp_bay;
+        biaya.setText("Rp. "+bay);
         refresh();
         }        // TODO add your handling code here:
     }//GEN-LAST:event_btnhapActionPerformed
@@ -492,12 +556,14 @@ int jawab = JOptionPane.showOptionDialog(this,
     }//GEN-LAST:event_txtjumActionPerformed
 
     private void btntamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btntamActionPerformed
-            transaksi trans = new transaksi();
+            transaksi trans = new jual();
   if ((txtkode.getText().length()==0) || (cmbjen.getSelectedItem()=="")|| (cmbbah.getSelectedItem()=="")|| (cmbfurn.getSelectedItem()=="") || (txtjum.getText().length()==0) || (txthar.getText().length()==0) || (txttot.getText().length()==0)){
    JOptionPane.showMessageDialog(null, " Data Tidak Lengkap!!!");
   }else{
      String kode = txtkode.getText();
      String nama = (String)cmbfurn.getSelectedItem();
+     String jenis = (String) cmbjen.getSelectedItem();
+     String bahan = (String) cmbbah.getSelectedItem();
      Integer jumlah = Integer.parseInt((txtjum.getText()));
      double harga = Double.parseDouble((txthar.getText()));
      double total = Double.parseDouble((txttot.getText()));
@@ -505,8 +571,10 @@ int jawab = JOptionPane.showOptionDialog(this,
      trans.setNama(nama);
      trans.setJumlah(jumlah);
      trans.setHarga(harga);
+     trans.setJenis(jenis);
+     trans.setBahan(bahan);
      
-     String cari = "Select * from temp_jual where nama = '" + trans.getNama() + "' ";
+     String cari = "Select * from temp_jual where nama = '" + trans.getNama() + "' and jenis = '" + trans.getJenis()+"' and bahan = '" + trans.getBahan() + "' ";
      Database db = new Database();
    if (vsimpan == true){
      try
@@ -514,12 +582,12 @@ int jawab = JOptionPane.showOptionDialog(this,
        if (db.CariData(cari) == true) {
            JOptionPane.showMessageDialog(null, " Data Sudah Ada!!!");
        }else{
-        String sql = "insert into temp_jual Values ('"+id+ "', '" + trans.getKode() + "','" + trans.getNama()+ "','" + trans.getJumlah() + "','" + trans.getHarga() + "','" + trans.getTotal() + "')";
+        String sql = "insert into temp_jual Values ('"+autotemp()+ "', '" + trans.getKode() + "','" + trans.getNama()+ "','" + trans.getJenis()+ "','" + trans.getBahan()+ "','" + trans.getJumlah() + "','" + trans.getHarga() + "','" + trans.getTotal() + "')";
         java.sql.Connection conn = (java.sql.Connection)app.pegawai.Database.koneksiDB();
         java.sql.PreparedStatement pst = conn.prepareStatement(sql);
         pst.execute();
         bay = bay + trans.getTotal();
-        biaya.setText(Double.toString(bay));
+        biaya.setText("Rp. "+Double.toString(bay));
         
         JOptionPane.showMessageDialog(null, "Berhasil Disimpan");
         refresh();
@@ -530,16 +598,13 @@ int jawab = JOptionPane.showOptionDialog(this,
      
     }else{
          try{
-                    if (db.CariData(cari) == true) {
-           JOptionPane.showMessageDialog(null, " Data Sudah Ada!!!");
-       }else{
-        String sql = "update temp_jual set kode= '" + trans.getKode() +"',nama='" + trans.getNama() + "',jumlah='" + trans.getJumlah() + "',harga='" + trans.getHarga() + "',total='" + trans.getTotal() + "' where id='" + id + "'";
+        String sql = "update temp_jual set kode= '" + trans.getKode() +"',nama='" + trans.getNama() + "',jenis = '" + trans.getJenis()+ "', baahn ='" + trans.getBahan()+ "',jumlah='" + trans.getJumlah() + "',harga='" + trans.getHarga() + "',total='" + trans.getTotal() + "' where id='" + id + "'";
         java.sql.Connection conn = (java.sql.Connection)app.pegawai.Database.koneksiDB();
         java.sql.PreparedStatement pst = conn.prepareStatement(sql);
         pst.execute();
         JOptionPane.showMessageDialog(null, "Berhasil Disimpan");
           refresh();
-                    }
+                    
             }catch (SQLException | HeadlessException e){
         JOptionPane.showMessageDialog(null, e);
     }
@@ -618,12 +683,21 @@ try
     }//GEN-LAST:event_btnhitActionPerformed
 
     private void btnbatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbatActionPerformed
-         batal();
+  try{
+            String sql = "delete from temp_jual";
+            java.sql.Connection conn = (java.sql.Connection)app.pegawai.Database.koneksiDB();
+            java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+            pst.execute();
+            }catch (SQLException | HeadlessException e){
+            }
+        
+        batal();
     }//GEN-LAST:event_btnbatActionPerformed
 
     private void btnrefActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnrefActionPerformed
+        if (vedit){
         bay = bay + temp_bay;
-        
+        biaya.setText("Rp. "+(bay));}
         refresh();
     }//GEN-LAST:event_btnrefActionPerformed
 
@@ -636,7 +710,8 @@ try
          txtjum.setEnabled(true);
          txthar.setEnabled(false);
          txttot.setEnabled(false);
-         
+         temp_bay=0;
+         btnbay.setEnabled(true);
          btnin.setEnabled(false);
          btntam.setEnabled(true);
          btnref.setEnabled(true);
@@ -646,6 +721,7 @@ try
     }//GEN-LAST:event_btninActionPerformed
 
     private void btnedtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnedtActionPerformed
+vedit = true;
         vsimpan=false; 
         txtkode.setEnabled(false);
          cmbjen.setEnabled(true);
@@ -655,6 +731,10 @@ try
          txthar.setEnabled(false);
          txttot.setEnabled(false);
          
+         bay = bay - temp_bay;
+         biaya.setText("Rp. "+bay);
+         
+         btnbay.setEnabled(true);
          btnin.setEnabled(false);
          btntam.setEnabled(true);
          btnref.setEnabled(true);
@@ -662,6 +742,180 @@ try
          btnhap.setEnabled(false);
          btnbat.setEnabled(true);
     }//GEN-LAST:event_btnedtActionPerformed
+
+    private void dataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dataMouseClicked
+ vedit=false;
+        try{
+        int row = data.getSelectedRow();
+        String table_klik = (data.getModel().getValueAt(row, 0).toString());
+          java.sql.Connection conn = (java.sql.Connection)app.pegawai.Database.koneksiDB();
+            java.sql.Statement stm = conn.createStatement();
+            java.sql.ResultSet sql = stm.executeQuery("Select * from temp_jual where id = '"+table_klik+"'");
+     if(sql.next()){
+         id = sql.getString("id");
+         
+         String kode = sql.getString("kode");
+         txtkode.setText(kode);
+         String nama = sql.getString("nama");
+ 
+             String jenis = sql.getString("jenis");
+             
+             String bahan = sql.getString("bahan");
+             
+             cmbjen.setSelectedItem(jenis);
+             cmbbah.setSelectedItem(bahan);
+         
+         cmbfurn.setSelectedItem(nama);
+          String jumlah = sql.getString("jumlah");
+         txtjum.setText(jumlah);
+          String harga = sql.getString("harga");
+         txthar.setText(harga);
+        
+          String total = sql.getString("total");
+         txttot.setText(total);
+         temp_bay = Double.parseDouble(total);
+     }
+     }catch (Exception e){}
+     txtkode.setEnabled(false);
+         cmbjen.setEnabled(false);
+         cmbbah.setEnabled(false);
+         cmbfurn.setEnabled(false);
+         txtjum.setEnabled(false);
+         txthar.setEnabled(false);
+         txttot.setEnabled(false);
+         
+      btnin.setEnabled(false);
+      btntam.setEnabled(false);
+      btnref.setEnabled(true);
+      btnedt.setEnabled(true);
+      btnhap.setEnabled(true);
+      
+      
+    }//GEN-LAST:event_dataMouseClicked
+
+    private void btnbayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbayActionPerformed
+        String ids,date,nama,kode,jenis,bahan;
+        double harga,total;
+        int i,itot,jumtot,jumlah;
+        i=0;
+        itot=0;
+        jumtot = 0;
+        jumlah = 0;
+        harga = 0;
+        total = 0;
+        nama = "";
+        date=tgljual.getText();
+        kode="";
+        jenis="";
+        bahan="";
+        ids="";
+        if (txtbay.getText().length()!=0){
+            
+        
+        try{
+             java.sql.Connection conn = (java.sql.Connection)app.pegawai.Database.koneksiDB();
+            java.sql.Statement stm = conn.createStatement();
+            java.sql.ResultSet sql = stm.executeQuery("Select id from temp_jual order by id ASC");
+            while(sql.next()){
+                i=sql.getInt("id");
+            }
+            itot = i;
+            while(itot>0){
+                java.sql.ResultSet tes = stm.executeQuery("Select * from temp_jual where id = '" + itot + "' ");
+                while(tes.next()){
+                    ids = tes.getString("id");
+                    kode=tes.getString("kode");
+                    nama = tes.getString("nama");
+                    jenis=tes.getString("jenis");
+                    bahan=tes.getString("bahan");
+                    jumlah=tes.getInt("jumlah");
+                    harga=tes.getDouble("harga");
+                    total=tes.getDouble("total");
+                }
+                jumtot = jumtot + jumlah;
+                try{
+                String sql1 ="insert into jual values('"+autojual()+"', '"+kode+"','"+nama+"', '"+jumlah+"', '"+harga+"', '"+total+"', '"+date+"'  )";
+                java.sql.PreparedStatement pst1 = conn.prepareStatement(sql1);
+                pst1.execute();
+                }catch (SQLException | HeadlessException e){
+            }
+                try{
+                String sql4 ="update furnitur set jumlah = jumlah - '"+ jumlah +"' where nama = '"+nama+"' and jenis = '"+jenis+"' and bahan = '"+bahan+"' ";
+                java.sql.PreparedStatement pst4 = conn.prepareStatement(sql4);
+                pst4.execute();
+                }catch (SQLException | HeadlessException e){
+            }
+                try{
+                String sql2 ="delete from temp_jual where id='"+ids+"' ";
+                java.sql.PreparedStatement pst2 = conn.prepareStatement(sql2);
+                pst2.execute();
+                }catch (SQLException | HeadlessException e){
+            }
+               itot = itot - 1;
+            }
+            try{
+            String sql3 ="insert into detail_jual values('"+autoid()+"', '"+kode+"', '"+jumtot+"',  '"+bay+"', '"+date+"'  )";
+                java.sql.PreparedStatement pst3 = conn.prepareStatement(sql3);
+                pst3.execute();
+            }catch (SQLException | HeadlessException e){
+            }
+                
+        }catch (SQLException | HeadlessException e){
+            }
+       batal();
+        }else{
+            JOptionPane.showMessageDialog(null, " Belum Bayar !!!");
+        }
+        
+        
+    }//GEN-LAST:event_btnbayActionPerformed
+
+    private void btnhit1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnhit1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnhit1ActionPerformed
+
+    private void btnhitung2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnhitung2ActionPerformed
+  double bayar,harus,kembali;
+        double harga,total;
+        transaksi trans = new transaksi();
+        if(txtbay.getText().length() != 0){
+        harus = bay;
+        bayar = Double.parseDouble(txtbay.getText());
+        
+        kembali = bayar - harus;
+        
+            
+   
+        txtkem.setText(Double.toString(kembali));
+        }else{
+            txtkem.setText("0");
+        }  
+    }//GEN-LAST:event_btnhitung2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+            GetData();
+            txtcari.setText("");        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btncariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncariActionPerformed
+ if ((txtcari.getText().length()==0)){
+         JOptionPane.showMessageDialog(null, " Data Tidak Lengkap!!!!");
+        }else{
+        try {
+        Connection conn =(Connection)app.pegawai.Database.koneksiDB();
+        java.sql.Statement stm = conn.createStatement();
+    
+        java.sql.ResultSet sql = stm.executeQuery("select * from temp_jual Where nama like '%" +txtcari.getText()+"%'");
+        data.setModel(DbUtils.resultSetToTableModel(sql));
+      
+        
+       
+        
+    }
+    catch (SQLException | HeadlessException e) {
+    }
+        }              // TODO add your handling code here:
+    }//GEN-LAST:event_btncariActionPerformed
 
     /**
      * @param args the command line arguments
@@ -702,9 +956,12 @@ try {
     private javax.swing.JLabel biaya;
     private javax.swing.JButton btnbat;
     private javax.swing.JButton btnbay;
+    private javax.swing.JButton btncari;
     private javax.swing.JButton btnedt;
     private javax.swing.JButton btnhap;
     private javax.swing.JButton btnhit;
+    private javax.swing.JButton btnhit1;
+    private javax.swing.JButton btnhitung2;
     private javax.swing.JButton btnin;
     private javax.swing.JButton btnkel;
     private javax.swing.JButton btnref;
@@ -713,11 +970,13 @@ try {
     private javax.swing.JComboBox<String> cmbfurn;
     private javax.swing.JComboBox<String> cmbjen;
     private javax.swing.JTable data;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -729,6 +988,7 @@ try {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel tgljual;
     private javax.swing.JTextField txtbay;
+    private javax.swing.JTextField txtcari;
     private javax.swing.JTextField txthar;
     private javax.swing.JTextField txtjum;
     private javax.swing.JTextField txtkem;

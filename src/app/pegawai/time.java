@@ -18,7 +18,7 @@ public class time {
   public void setTime() {
     LocalDateTime myDateObj = LocalDateTime.now();
  
-    DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     formattedDate = myDateObj.format(myFormatObj);
 

@@ -154,6 +154,10 @@ try {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         data = new javax.swing.JTable();
+        jLabel7 = new javax.swing.JLabel();
+        txtcari = new javax.swing.JTextField();
+        btncari = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -256,17 +260,48 @@ try {
         });
         jScrollPane1.setViewportView(data);
 
+        jLabel7.setText("Cari Data");
+
+        btncari.setText("Cari");
+        btncari.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btncariActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Refresh");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 510, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtcari, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35)
+                .addComponent(btncari)
+                .addGap(18, 18, 18)
+                .addComponent(jButton1)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(6, 6, 6)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(txtcari, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btncari)
+                    .addComponent(jButton1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -442,6 +477,31 @@ try{
       btnhap.setEnabled(true);          // TODO add your handling code here:
     }//GEN-LAST:event_dataMouseClicked
 
+    private void btncariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncariActionPerformed
+ if ((txtcari.getText().length()==0)){
+         JOptionPane.showMessageDialog(null, " Data Tidak Lengkap!!!!");
+        }else{
+        try {
+        Connection conn =(Connection)app.pegawai.Database.koneksiDB();
+        java.sql.Statement stm = conn.createStatement();
+    
+        java.sql.ResultSet sql = stm.executeQuery("select * from furnitur Where nama like '%" +txtcari.getText()+"%'");
+        data.setModel(DbUtils.resultSetToTableModel(sql));
+      
+        
+       
+        
+    }
+    catch (SQLException | HeadlessException e) {
+    }
+        }         // TODO add your handling code here:
+    }//GEN-LAST:event_btncariActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+            GetData();
+            txtcari.setText("");        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -482,6 +542,7 @@ try {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btncari;
     private javax.swing.JButton btnedt;
     private javax.swing.JButton btnhap;
     private javax.swing.JButton btnin;
@@ -491,15 +552,18 @@ try {
     private javax.swing.JComboBox<String> cmbbah;
     private javax.swing.JComboBox<String> cmbjen;
     private javax.swing.JTable data;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField txtcari;
     private javax.swing.JTextField txthar;
     private javax.swing.JTextField txtjum;
     private javax.swing.JTextField txtnama;
